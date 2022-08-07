@@ -1,7 +1,4 @@
 # update_wrapper Decorator로 원래 속성 검색
-from doctest import Example
-from sys import exec_prefix
-
 
 def is_admin(f):
     def wrapper(self,*args,**kwargs):
@@ -25,5 +22,4 @@ def foobar(username="someone"):
 
 foobar.__doc__  #
 foobar.__name__ #'wrapper'
-
 

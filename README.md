@@ -12,3 +12,7 @@
 - class_1 : Class를 함수로 래핑
 - class_2 : print() 함수를 래핑해 세션에서 호출된 횟수를 확인
 - class_3 : update_wrapper Decorator로 원래 속성 검색
+- class_4 : 파이썬 표준라이브러리 functools 모듈은 래퍼 자체에 손실된 원래 함수의 속성을 복사하는 update_wrapper() 함수로 이 문제를 해결. update_wrapper()
+- class_5 : Dacorator용 Dacorator
+- class_6 : 검사를 통해 관련 정보 추출
+- 
