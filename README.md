@@ -15,4 +15,8 @@
 - class_4 : 파이썬 표준라이브러리 functools 모듈은 래퍼 자체에 손실된 원래 함수의 속성을 복사하는 update_wrapper() 함수로 이 문제를 해결. update_wrapper()
 - class_5 : Dacorator용 Dacorator
 - class_6 : 검사를 통해 관련 정보 추출
+
+### Python에서 Method가 작동하는 방법
+- method_1 : 메서드(클래스 속성으로 저장되는 함수)
+- method_2 : 정적 메서드
 - 
