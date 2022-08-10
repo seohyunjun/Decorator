@@ -1,7 +1,4 @@
 # 메서드(클래스 속성으로 저장되는 함수)
-from xml.etree.ElementTree import PI
-
-
 class Pizza(object):
     def __init__(self, size):
         self.size = size
