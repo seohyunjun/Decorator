@@ -18,5 +18,7 @@
 
 ### Python에서 Method가 작동하는 방법
 - method_1 : 메서드(클래스 속성으로 저장되는 함수)
-- method_2 : 정적 메서드
+- method_2 : 정적 메서드(@staticmethod)
+- method_3 : 클래스 메서드(@classmethod)
+- method_4 : 추상 메서드(@abstractmethod)
 - 

@@ -24,6 +24,3 @@ class Pizza(object):
 Pizza().cook is Pizza().cook # False # 바인딩 생성
 Pizza().mix_ingredients is Pizza.mix_ingredients # True
 Pizza().mix_ingredients is Pizza().mix_ingredients # True 바인딩 생성 x
-
-
-
