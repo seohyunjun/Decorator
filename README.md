@@ -22,4 +22,6 @@
 - method_3 : 클래스 메서드(@classmethod)
 - method_4 : 추상 메서드(@abstractmethod)
 - method_5 : 정적, 클래스, 추상 메서드 혼합하기
-- 
+  
+### 함수형 프로그래밍
+- functional_1 :
