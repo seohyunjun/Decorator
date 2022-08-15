@@ -24,4 +24,5 @@
 - method_5 : 정적, 클래스, 추상 메서드 혼합하기
   
 ### 함수형 프로그래밍
-- functional_1 :
+- functional_1 : pure function 순수함수
+- functional_2 : 제너레이터, 리스트 컴프리헨션
