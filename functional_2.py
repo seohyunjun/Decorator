@@ -75,6 +75,7 @@ list(gen)
 
 # 제너레이터 검사하기
 # 함수가 제너레이터로 고려할 수 있는지 확인하려면 inspect.isgeneratorfunction()를 사용한다.
+
 import inspect
 def mygenerator():
     yield 1
@@ -109,3 +110,55 @@ inspect.getgeneratorstate(gen)
 # 'GEN_CLOSED' : 실행 완료
 
 ## 제너레이터를 디버깅하는데 유용하다
+
+
+## 리스트 컴프리헨션
+# listcomp 파이썬 리스트의 내용을 선언과 인라인으로 정의
+
+x = [
+    word.capitalize() 
+    for line in ("hello world?", "or not")
+    for word in line.split()
+    if not word.startswith("or")
+]
+# 루프 대신 리스트 컴프리핸션을 사용하면 파이썬 리스트를 빠르고 깔끔하게 정의 가능
+
+{x:x.upper() for x in ['hello','world']}
+{x.upper() for x in ['hello','world']}
+
+# 함수형, 함수, 함수화
+## map()으로 각 항목에 함수 적용하기
+## map() 함수는 형식 map(function, iterable)을 사용한다.
+map(lambda x: x + 'bzz!',["I think","I'm good"])
+# <map object at 0x1051444f0>
+
+list(map(lambda x: x + 'bzz!',["I think","I'm good"]))
+
+# filter()로 파이썬 리스트 필터링하기
+# filter() 함수는 filter(function 또는 None, iterable) 형식을 사용하며 함수에서 반환된 결과에 따라 iterable 항목을 필터링한다. 
+
+# map과 다르게 iteration의 항목을 추출
+list(filter(lambda x: x.startswith("I "),["I think","I'm good"]))
+# ['I think']
+
+list(map(lambda x: x.startswith("I "),["I think","I'm good"]))
+# [True, False]
+list(filter(lambda a: a,(1,2)))
+
+# enumerate()로 인덱스 얻기
+i = 0
+mylist = [1,2,3]
+while i < len(mylist):
+    print("Item %d: %s" % (i, mylist[i]))
+    i += 1
+
+for i, item in enumerate(mylist):
+    print("Item %d: %s" % (i, item))
+
+# sorted()로 파이썬 리스트 정렬하기
+## 정렬된 버전의 iterable을 반환한다.
+## sorted(iterable, key=None, reverse=False)
+sorted([("a",2),("c",1),("d",4)])
+# [('a', 2), ('c', 1), ('d', 4)]
+sorted([("a",2),("c",1),("d",4)],key=lambda x: x[1])
+# [('c', 1), ('a', 2), ('d', 4)]
