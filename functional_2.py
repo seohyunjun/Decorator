@@ -76,6 +76,8 @@ list(gen)
 # 제너레이터 검사하기
 # 함수가 제너레이터로 고려할 수 있는지 확인하려면 inspect.isgeneratorfunction()를 사용한다.
 
+from code import interact
+from email.policy import default
 import inspect
 def mygenerator():
     yield 1
@@ -142,7 +144,7 @@ list(filter(lambda x: x.startswith("I "),["I think","I'm good"]))
 # ['I think']
 
 list(map(lambda x: x.startswith("I "),["I think","I'm good"]))
-# [True, False]
+# a[True, False]
 list(filter(lambda a: a,(1,2)))
 
 # enumerate()로 인덱스 얻기
@@ -162,3 +164,120 @@ sorted([("a",2),("c",1),("d",4)])
 # [('a', 2), ('c', 1), ('d', 4)]
 sorted([("a",2),("c",1),("d",4)],key=lambda x: x[1])
 # [('c', 1), ('a', 2), ('d', 4)]
+
+# any, all 조건을 충족하는 항목 찾기
+def all(iterable):
+    for x in iterable:
+        if not x:
+            return False
+        
+def any(iterable):
+    for x in iterable:
+        if x:
+            return True
+    return False
+
+mylist = [0, 1, 3, -1]
+if all(map(lambda x: x>0, mylist)): # all(map(lambda x: x>0, mylist)) False
+    print("All times are greater than 0")
+    
+if any(map(lambda x: x>0, mylist)): # any(map(lambda x: x>0, mylist)) True
+    print("All times are greater than 0")
+    
+# list() 와 zip() 결합하기
+keys = ["foobar","barzz","ba!"]
+map(len,keys) # <map object at 0x105233340>
+list(zip(keys, map(len, keys))) # list set
+dict(zip(keys, map(len,keys))) # dict 
+
+
+
+# 간단한 코드로 항목 찾기 - 효율적인 코드 작성
+
+# 첫번째 상수 찾기
+
+# STEP1 비효율적인 방법 
+list(filter(lambda x: x>0,[-1,0,1,2]))[0] # 빈 list 일 경우 IndexError가 발생 할 수도 있다.
+
+## STEP2 효율적인 방법
+next(filter(lambda x: x>0, [-1,0,1,2]))
+
+a = range(10)
+next(x for x in a if x > 3) # 조건이 충족되지 않으면 StopIteration
+
+# 조건이 충족되지 않을때 기본값 반환하기
+next((x for x in a if x>10),"default")
+
+## first()를 사용해 조건에 일치하는 첫번쨰 요소 찾기
+def first(iterable, default=None, key=None):
+    """
+    Return first element of `iterable` that evaluates true, else return None
+    (or an optional default value).
+    >>> first([0, False, None, [], (), 42])
+    42
+    >>> first([0, False, None, [], ()]) is None
+    True
+    >>> first([0, False, None, [], ()], default='ohai')
+    'ohai'
+    >>> import re
+    >>> m = first(re.match(regex, 'abc') for regex in ['b.*', 'a(.*)'])
+    >>> m.group(1)
+    'bc'
+    The optional `key` argument specifies a one-argument predicate function
+    like that used for `filter()`.  The `key` argument, if supplied, must be
+    in keyword form.  For example:
+    >>> first([1, 1, 3, 4, 5], key=lambda x: x % 2 == 0)
+    4
+    """
+    if key is None:
+        for el in iterable:
+            if el:
+                return el
+    else:
+        for el in iterable:
+            if key(el):
+                return el
+
+    return default
+
+first([0, False, None, [], (), 42])
+# 42
+first([-1,0,1,2]) 
+# -1
+
+first([-1,0,1,2], key=lambda x: x>0)
+# 1
+
+# functools + lambda 
+# lambda를 사용하지 않고 first구현  
+import operator 
+
+def greater_than_zero(number):
+    return number > 0
+
+first([-1,0,1,2], key=greater_than_zero) 
+
+# lambda의 한계, 한 줄 이상의 코드가 필요하므로 key 함수를 전달 할 수 없다.
+# key함수에 대해 새 함수를 정의하는 번거로운 패턴으로 바뀐다.
+
+# functools에는 lambda에 대한 유연한 대안인 partial() 메서드가 있다.
+# greater_than_zero 처럼 작동하는 새 함수 greater_than을 사용한다.
+# 이 버전을 사용하면 숫자를 하드코딩하기 전에 비교할 값을 지정할 수 있다.
+# 1. fuctools.partial()을 함수와 최솟값에 전달
+# 2. 원하는대로 min 42를 설정한 새로운 함수를 다시 얻는다.
+ 
+from functools import partial
+# 두 숫자를 비교
+# operator.le(a,b)는 두개의 숫자를 가져와 첫 번째 숫자가 두 번째보다 적거나 같은지 boolean 리턴 후 
+# partial()에 반환 
+first([-1,0,1,2], key=partial(operator.le,0))
+
+## itertools 활용
+# - accumulate  : iterable에서 누적된 아이템의 합계 반환
+# - chain       : 모든 항목의 중간 파이썬 리스트를 작성하지 않고 여러 번 반복해서 사용 가능
+# - combinations: 주어진 iterable에서 길이 r의 모든 조합을 생성
+# - compress    : selectors에서 data에 boolean 마스크를 적용하고 selectors의 해당요소가 True인 data에서 값만 반환
+# - count       : 끝없이 많은 시퀀스를 생성
+# - cycle       : iterable 값에 대해 반복
+
+

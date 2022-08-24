@@ -1,3 +1,6 @@
+<img src='https://www.hanbit.co.kr/data/books/B2649943562_l.jpg'>
+
+
 # python @ Decorator
 
 > Example Decorator
@@ -25,4 +28,5 @@
   
 ### 함수형 프로그래밍
 - functional_1 : pure function 순수함수
-- functional_2 : 제너레이터, 리스트 컴프리헨션
+- functional_2 : 제너레이터, 리스트 컴프리헨션, any,all 항목찾기
+- 
