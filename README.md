@@ -29,4 +29,9 @@
 ### 함수형 프로그래밍
 - functional_1 : pure function 순수함수
 - functional_2 : 제너레이터, 리스트 컴프리헨션, any,all 항목찾기
+
+## AST, Hy 리스프 계열 속성
+- ast_1 : ast모듈 python 내장 함수, 코드 분석 함수 (exec, single, eval),
+          ReplaceBinOp operator 변경 가능
+-  
 - 
