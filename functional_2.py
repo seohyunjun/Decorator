@@ -279,5 +279,20 @@ first([-1,0,1,2], key=partial(operator.le,0))
 # - compress    : selectors에서 data에 boolean 마스크를 적용하고 selectors의 해당요소가 True인 data에서 값만 반환
 # - count       : 끝없이 많은 시퀀스를 생성
 # - cycle       : iterable 값에 대해 반복
+# - repeat      : 요소를 n번 반복
+# - dropwhile   : predicate가 False가 될 때까지 처음부터 순회 가능한 요소를 필터링
+# - groupby     : keyfunc() 함수에서 반환된 결과에 따라 항목을 그룹화하는 이터레이터를 만든다.
+# - permutations: 항목의 연속적인 r 길이 순열을 계속 반환
+# - product     : 곱집합의 iterables를 반환, 중첩된 for 문을 사용하지 않고 반복할 수 있다.
+# - takewhile   : 처음부터 predicate가 False가 될 때까지 순회 가능한 요소를 반환
+
+import itertools
+a = [{'foo': 'bar'},{'foo': 'bar','x':42},{'foo': 'baz', 'y':43}]
+import operator
+list(itertools.groupby(a, operator.itemgetter('foo')))
+# [('bar', <itertools._grouper object at 0x10528d940>), ('baz', <itertools._grouper object at 0x10528d790>)]
+
+[(key, list(group)) for key, group in itertools.groupby(a, operator.itemgetter('foo'))] 
+# operator를 사용하면 연산자를 사용하지 않아도 된다.
 
 
